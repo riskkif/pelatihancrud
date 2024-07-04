@@ -38,10 +38,13 @@ class DatabaseSeeder extends Seeder
                 'role' => 'pengguna',
             ]
             ];
+
             foreach($roles as $role){
                 Role::create([
                     'name' => $role
                 ]);
+            }
+
             foreach($users as $user){
                 User::create([
                     'name' => $user['name'],
@@ -52,5 +55,4 @@ class DatabaseSeeder extends Seeder
 
             }
     }
-}
 }
