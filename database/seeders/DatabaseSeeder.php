@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,6 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $roles = ['super', 'admin', 'pengguna'];
         $users = [
             [
                 'name' => 'Superadmin',
@@ -35,5 +38,19 @@ class DatabaseSeeder extends Seeder
                 'role' => 'pengguna',
             ]
             ];
+            foreach($roles as $role){
+                Role::create([
+                    'name' => $role
+                ]);
+            foreach($users as $user){
+                User::create([
+                    'name' => $user['name'],
+                    'email' => $user['email'],
+                    'password' => $user['password'],
+                    'phone' => $user['phone'],
+                ])->assignRole($user['role']);
+
+            }
     }
+}
 }
